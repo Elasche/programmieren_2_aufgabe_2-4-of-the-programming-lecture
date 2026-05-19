@@ -7,6 +7,15 @@ def get_names(person_data):
     ]
     return names
 
+def get_picture_path(person_data, selected_user):
+
+    for person in person_data:
+
+        full_name = f"{person['firstname']} {person['lastname']}"
+
+        if full_name == selected_user:
+            return person["picture_path"]
+
 
 def load_person_data():
     """A Function that knows where the person database is and returns a dictionary with the persons"""
@@ -23,4 +32,6 @@ if __name__ == "__main__":
 
     print(person_data)
     print(get_names(person_data))
+    
+
 
