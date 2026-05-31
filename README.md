@@ -1,16 +1,42 @@
 # programmieren_2_aufgabe_2-4-of-the-programming-lecture
 This repository is used for exercise 2-4
 
-# EKG App – Interaktiver Plot
+# EKG App – Interaktiver Power & HR Plot
 
-## Beschreibung
-Diese Streamlit-App visualisiert Power- und Herzfrequenzdaten einer Versuchsperson.
-Es können verschiedene Personen ausgewählt und deren Daten interaktiv analysiert werden.
+Diese Streamlit-App dient zur Analyse von EKG- und Leistungsdaten verschiedener Versuchspersonen.
 
-Zusätzlich werden Herzfrequenz-Zonen berechnet und im Plot dargestellt.
+## Die Anwendung ermöglicht:
+- Auswahl einer Versuchsperson
+- Anzeige eines zugehörigen Profilbildes
+- Visualisierung von Leistungsdaten (Power & Heart Rate)
+- Darstellung von Herzfrequenz-Zonen zur Trainingsanalyse
 
-## Features
-- Auswahl von Versuchspersonen
-- Anzeige von Bildern zur Person
-- Interaktive Power & Heart Rate Visualisierung
-- Herzfrequenz-Zonen Darstellung
+
+
+## Das Projekt wurde in **Python** entwickelt und basiert auf:
+
+- Streamlit (Web-App Interface)
+- Plotly (interaktive Visualisierung)
+- Pandas (Datenverarbeitung)
+- Pillow (Bildverarbeitung)
+- PDM als Paket-Manager
+
+---
+
+## Projektstruktur vereinfacht:
+
+- `main.py` → Startpunkt der Streamlit-App
+- `read_data.py` → Laden von Personendaten & Bildern
+- `read_pandas.py` → Erstellung der Plots
+- `data/` → EKG- und Messdaten
+
+---
+
+## Installation & Start (mit PDM)
+
+Dieses Projekt verwendet **PDM (Python Development Master)** als Paketmanager.
+
+### 1. Abhängigkeiten installieren
+
+```bash
+pdm install
