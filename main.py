@@ -4,9 +4,6 @@ from read_pandas import make_power_hr_plot, zone_bar_plot, read_my_activity
 from PIL import Image
 
 
-
-
-
 #Aushwal zwischen anzeige
 
 page = st.radio(
