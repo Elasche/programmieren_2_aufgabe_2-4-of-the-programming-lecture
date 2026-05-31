@@ -232,5 +232,5 @@ if __name__ == "__main__":
     my_fig = make_power_hr_plot(activity_df, max_hr)
     bar_HR_zone = zone_bar_plot(activity_df, max_hr)
 
-    st.plotly_chart(my_fig)
-    st.plotly_chart(bar_HR_zone)
+    #st.plotly_chart(my_fig)
+    #st.plotly_chart(bar_HR_zone)
