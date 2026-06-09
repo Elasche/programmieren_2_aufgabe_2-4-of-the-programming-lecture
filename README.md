@@ -59,3 +59,7 @@ Die Eingabedaten werden aus einer CSV-Datei eingelesen. Die Ausgabe besteht aus:
 - einem DataFrame mit Zeit und Leistung
 - einer grafischen Darstellung der Power Curve
 
+## Screenshot
+
+![Power Curve](screenshot.png)
+
