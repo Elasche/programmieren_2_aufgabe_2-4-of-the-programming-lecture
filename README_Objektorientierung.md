@@ -11,7 +11,7 @@ Dieses Projekt analysiert EKG-Daten und erkennt Peaks automatisch.
 - Visualisierung mit Plotly
 
 Screenshot_Objektorientierung
-![EKG-Peaks](Screenshot_Objektorientierung)
+![EKG-Peaks](Screenshot_Objektorientierung.png)
 
 ## Nutzung
 Virtuelle Umgebung und Abhängigkeiten installieren
