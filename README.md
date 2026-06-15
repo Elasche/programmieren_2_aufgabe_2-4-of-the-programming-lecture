@@ -40,3 +40,26 @@ Dieses Projekt verwendet **PDM (Python Development Master)** als Paketmanager.
 
 ```bash
 pdm install
+```
+
+
+
+# _____________________________________________________
+
+# Leistungskurve II Abgabe 4
+
+es muss folgendes dokument ausfegrührt werden
+## advanced_powercurve
+
+Dieses Projekt erstellt eine Power Curve (Leistungskurve) auf Basis von Leistungsdaten in Watt.
+
+Für verschiedene Zeitfenster wird die maximale durchschnittliche Leistung berechnet und anschließend als Diagramm dargestellt.
+
+Die Eingabedaten werden aus einer CSV-Datei eingelesen. Die Ausgabe besteht aus:
+- einem DataFrame mit Zeit und Leistung
+- einer grafischen Darstellung der Power Curve
+
+## Screenshot
+
+![Power Curve](screenshot.png)
+
