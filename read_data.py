@@ -1,16 +1,14 @@
 import json
 
+
 def get_names(person_data):
-    names = [
-        f"{person['firstname']} {person['lastname']}"
-        for person in person_data
-    ]
+    names = [f"{person['firstname']} {person['lastname']}" for person in person_data]
     return names
+
 
 def get_picture_path(person_data, selected_user):
 
     for person in person_data:
-
         full_name = f"{person['firstname']} {person['lastname']}"
 
         if full_name == selected_user:
@@ -24,14 +22,9 @@ def load_person_data():
     return person_data
 
 
-
-
 if __name__ == "__main__":
     person_data = load_person_data()
     print(type(person_data))
 
     print(person_data)
     print(get_names(person_data))
-    
-
-

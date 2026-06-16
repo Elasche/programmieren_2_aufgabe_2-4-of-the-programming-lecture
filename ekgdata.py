@@ -6,23 +6,17 @@ import plotly.express as px
 
 # Klasse EKG-Data für Peakfinder, die uns ermöglicht peaks zu finden
 
-class EKGdata:
 
+class EKGdata:
     ## Konstruktor der Klasse soll die Daten einlesen
 
     def __init__(self, ekg_dict):
-        #pass
+        # pass
         self.id = ekg_dict["id"]
         self.date = ekg_dict["date"]
         self.data = ekg_dict["result_link"]
 
-
-        self.df = pd.read_csv(
-            self.data, 
-            sep='\t', 
-            header=None, 
-            names=['Messwerte in mV','Zeit in ms']
-            )
+        self.df = pd.read_csv(self.data, sep="\t", header=None, names=["Messwerte in mV", "Zeit in ms"])
 
         self.df = self.df.iloc[:5000]  # Entferne die erste Zeile, da sie nur die Spaltennamen enthält
 
@@ -38,7 +32,7 @@ class EKGdata:
     #     for person_dict in person_data:
     #         print(person)
     #         for ekg_test in person["ekg_tests"]:
-    #             return EKGdata(ekg_dict)      
+    #             return EKGdata(ekg_dict)
     #     return None
 
     @classmethod
@@ -52,15 +46,13 @@ class EKGdata:
                 if ekg_dict["id"] == test_id:
                     return cls(ekg_dict)
 
-        raise ValueError(           
-            f"EKG-Test mit ID {test_id} nicht gefunden."
-        )
+        raise ValueError(f"EKG-Test mit ID {test_id} nicht gefunden.")
 
     def find_peaks(self):
         df = self.df.copy()
 
-        window_ms = 150          # kleinere Fenstergröße = bessere Peak-Position
-        refractory_ms = 250      # kein Peak schneller als 250 ms
+        window_ms = 150  # kleinere Fenstergröße = bessere Peak-Position
+        refractory_ms = 250  # kein Peak schneller als 250 ms
         amplitude_threshold = 350  # Option A: feste Schwelle
 
         df["is_peak"] = False
@@ -101,16 +93,13 @@ class EKGdata:
     def calculate_avg_hr(self):
 
         if "is_peak" not in self.df.columns:
-            raise ValueError(
-                "Bitte zuerst find_peaks() ausführen."
-        )
+            raise ValueError("Bitte zuerst find_peaks() ausführen.")
 
         df = self.df.copy()
 
         df_peaks = df.loc[df["is_peak"]]
 
-
-        if len(df_peaks) < 2:                      
+        if len(df_peaks) < 2:
             return None
 
         anzahl_peaks = df["is_peak"].sum()
@@ -119,52 +108,36 @@ class EKGdata:
         df_peaks.head()
 
         dt_ms = df_peaks["Zeit in ms"].iloc[-1] - df_peaks["Zeit in ms"].iloc[0]
-        dt_mins = dt_ms / (60*1000)
+        dt_mins = dt_ms / (60 * 1000)
 
+        avg_hr = anzahl_peaks / dt_mins
 
-        avg_hr = anzahl_peaks / dt_mins            
-
-        self.avg_hr = avg_hr                       
+        self.avg_hr = avg_hr
 
         return avg_hr
-
-
 
     def plot_time_series(self, n_points=2000):
 
         df_plot = self.df.iloc[:n_points]
 
-        fig = px.line(
-            df_plot,
-            x="Zeit in ms",
-            y="Messwerte in mV",
-            title=f"EKG-Test ID: {self.id}" 
-        )
+        fig = px.line(df_plot, x="Zeit in ms", y="Messwerte in mV", title=f"EKG-Test ID: {self.id}")
 
         if self.peaks is not None and not self.peaks.empty:
-
             t_min = df_plot["Zeit in ms"].min()
             t_max = df_plot["Zeit in ms"].max()
 
-            visible_peaks = self.peaks[
-                (self.peaks["Zeit in ms"] >= t_min)
-                & (self.peaks["Zeit in ms"] <= t_max)
-            ]
+            visible_peaks = self.peaks[(self.peaks["Zeit in ms"] >= t_min) & (self.peaks["Zeit in ms"] <= t_max)]
 
             fig.add_scatter(
                 x=visible_peaks["Zeit in ms"],
                 y=visible_peaks["Messwerte in mV"],
                 mode="markers",
                 name="Peaks",
-                marker=dict(
-                    color="red",
-                    size=10,
-                    symbol="circle"
-                )
+                marker=dict(color="red", size=10, symbol="circle"),
             )
 
         return fig
-    
+
         # # WICHTIG: Streamlit statt fig.show()
         # import streamlit as st
         # st.plotly_chart(fig, use_container_width=True)
@@ -181,7 +154,6 @@ if __name__ == "__main__":
 
     print("--- Modul-Test gestartet ---")
 
-
     try:
         ekg = EKGdata.load_by_id(test_id=2)
 
@@ -189,10 +161,7 @@ if __name__ == "__main__":
 
         hr = ekg.calculate_avg_hr()
 
-        print(
-            f"Durchschnittliche Herzfrequenz: "
-            f"{hr:.1f} bpm"
-        )
+        print(f"Durchschnittliche Herzfrequenz: {hr:.1f} bpm")
 
         ekg.plot_time_series()
 

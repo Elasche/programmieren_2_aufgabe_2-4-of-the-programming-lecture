@@ -1,7 +1,3 @@
-
-
-
-
 # Wo startet sie Zeitreihe
 # Wo endet sich
 # Was ist die Maximale und Minimale Spannung
